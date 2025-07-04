@@ -44,6 +44,13 @@ python3 scapy_tool.py scan 192.168.1.10 20 80
 Analyze a PCAP for reverse shells:
 ```bash
 python3 scapy_tool.py detect reverse_shell_lab.pcap
+---
+
+## 📂 Usage Examples
+
+### Analyze a PCAP for reverse shell activity:
+```bash
+./run.sh detect reverse_shell_lab.pcap
 ```
 
 ## 🧠 Author
