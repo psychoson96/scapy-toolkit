@@ -55,6 +55,7 @@ python3 scapy_tool.py detect reverse_shell_lab.pcap
 
 ## 🧠 Author
 
-Nelson Perez – Cybersecurity & Networking | [LinkedIn](https://www.linkedin.com/in/nmp2663)
+Nelson Perez – Cybersecurity & Networking | [LinkedIn] (https://www.linkedin.com/in/nmp2663)
 
 ---
+linkedin.com/in/nmp2663
