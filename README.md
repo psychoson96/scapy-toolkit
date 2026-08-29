@@ -8,6 +8,12 @@ A Python-based network security toolkit built with Scapy, designed for both offe
 - **Port Scanner**: Basic TCP SYN scanner.
 - **PCAP Analyzer**: Scan `.pcap` files for reverse shell keywords like `cmd.exe`, `bash`, `sh -i`, etc.
 
+## 📖 Guides
+
+- **[Flipper Zero Home-Lab Guide](docs/FLIPPER_ZERO_HOME_LAB_GUIDE.md)** — a hands-on
+  workflow for testing *your own* network with a Flipper Zero (Momentum) + ESP32/Marauder,
+  and feeding the findings into this Scapy toolkit. Authorized/lab use only.
+
 ## 📦 Requirements
 
 - Python 3
