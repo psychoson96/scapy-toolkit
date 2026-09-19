@@ -1,5 +1,3 @@
-## suricata_alert_parser.py
-```python
 import json
 
 def parse_alerts(file_path):

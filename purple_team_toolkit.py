@@ -1,6 +1,5 @@
 # Purple Team Toolkit (Unified Script)
 
-```python
 import argparse
 import time
 from collections import defaultdict
@@ -64,4 +63,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-```

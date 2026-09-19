@@ -1,5 +1,3 @@
-## arp_monitor.py
-```python
 from scapy.all import sniff, ARP
 from datetime import datetime
 

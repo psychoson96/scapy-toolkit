@@ -1,5 +1,3 @@
-## dns_query_logger.py
-```python
 from scapy.all import sniff, DNSQR, IP, UDP
 from datetime import datetime
 
