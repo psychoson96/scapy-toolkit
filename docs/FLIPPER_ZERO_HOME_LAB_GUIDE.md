@@ -260,10 +260,13 @@ python3 purple_team_toolkit.py --mode anomaly                    # per-IP packet
 The lesson: any credential or command you can *read* in the payload scanner is a service
 running plaintext — move it to TLS.
 
-> **Note:** `purple_team_toolkit.py` currently has its Python wrapped in Markdown code
-> fences, and `run.sh` points at a `scapy_tool.py` that doesn't exist yet — see
-> [§8](#8-turning-findings-into-fixes) for the small cleanups that make these runnable.
-> Until then, run `red_team_toolkit.py` / `blue_team_toolkit.py` directly as shown above.
+> **Tip:** you can also drive all three toolkits through the unified dispatcher, which is
+> what `./run.sh` uses:
+> ```bash
+> python3 scapy_tool.py red  scan --target 192.168.50.42 --ports 22 23 80 443 1883
+> python3 scapy_tool.py blue --interface wlan0 --mode monitor
+> python3 scapy_tool.py purple --mode reverse --pcap test.pcap
+> ```
 
 ---
 
@@ -302,16 +305,13 @@ commands above actually run.
   prox.
 - Endpoints: enforced screen lock + USB control (defeats BadUSB).
 
-**Toolkit cleanups worth doing (I can do these next if you want):**
-- `purple_team_toolkit.py` — the code is wrapped in ```` ```python ```` Markdown fences,
-  so it won't execute as-is; strip the fences. It also uses `UDP` in `dns_spoof` in the
-  red toolkit without importing it.
-- `run.sh` — points at `scapy_tool.py`, which doesn't exist. Either add a small unified
-  `scapy_tool.py` dispatcher or repoint `run.sh` at the three existing toolkits.
-- `red_team_toolkit.py` `dns_spoof()` references `UDP` but only imports it implicitly —
-  add `UDP` to the Scapy import line.
-
-Say the word and I'll fix those so `./run.sh` and all three toolkits run clean.
+**Toolkit cleanups (done):**
+- `purple_team_toolkit.py` / `purple_team.py` — the Python was wrapped in ```` ```python ````
+  Markdown fences so it wouldn't execute; fences stripped, both now run.
+- `red_team_toolkit.py` `dns_spoof()` referenced `UDP` without importing it — added `UDP`
+  to the Scapy import line.
+- `run.sh` pointed at a missing `scapy_tool.py` — added a thin `scapy_tool.py` dispatcher
+  that routes `red` / `blue` / `purple` to the three toolkits, so `./run.sh` works.
 
 ---
 

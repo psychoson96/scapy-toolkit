@@ -1,10 +1,8 @@
+#!/usr/bin/env python3
 # Purple Team Toolkit (Unified Script)
-
-```python
 import argparse
 import time
 from collections import defaultdict
-from datetime import datetime
 from scapy.all import sniff, IP, TCP, Raw, rdpcap
 
 # --- Reverse Shell PCAP Scanner ---
@@ -64,4 +62,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-```

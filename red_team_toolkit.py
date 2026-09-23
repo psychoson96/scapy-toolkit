@@ -2,7 +2,7 @@
 import argparse
 import time
 import threading
-from scapy.all import ARP, Ether, srp, send, IP, TCP, DNS, DNSQR, DNSRR, sniff, sendp, Raw
+from scapy.all import ARP, Ether, srp, send, IP, TCP, UDP, DNS, DNSQR, DNSRR, sniff, sendp, Raw
 
 # --- ARP Spoofer ---
 def arp_spoof(target_ip, gateway_ip, iface):
