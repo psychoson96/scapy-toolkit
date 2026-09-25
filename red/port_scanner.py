@@ -39,7 +39,7 @@ def detect_shell_keywords(pcap_file):
                 if keyword in payload:
                     try:
                         decoded = payload.decode(errors='ignore')
-                    except:
+                    except Exception:
                         decoded = str(payload)
                     print(f"[!] Found '{keyword.decode()}' in packet:")
                     print(decoded)

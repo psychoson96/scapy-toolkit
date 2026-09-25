@@ -16,7 +16,9 @@ def passive_monitor(interface):
 scan_counter = Counter()
 
 def detect_scans(pkt):
-    if pkt.haslayer(TCP) and pkt[TCP].flags == "S":
+    # SYN set, ACK clear (a bare SYN, i.e. a scan probe). Bitwise check works
+    # whether scapy exposes flags as a str or a FlagValue.
+    if IP in pkt and TCP in pkt and (pkt[TCP].flags & 0x3F) == 0x02:
         ip = pkt[IP].src
         scan_counter[ip] += 1
         if scan_counter[ip] > 20:
@@ -24,7 +26,7 @@ def detect_scans(pkt):
 
 # --- DNS Request Logger ---
 def dns_logger(pkt):
-    if pkt.haslayer(UDP) and pkt[UDP].dport == 53:
+    if IP in pkt and UDP in pkt and pkt[UDP].dport == 53:
         print(f"[DNS] {pkt[IP].src} → DNS Query")
 
 # --- ARP Watcher ---
