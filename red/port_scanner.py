@@ -1,7 +1,14 @@
 #!/usr/bin/env python3
 
 import argparse
+import os
+import sys
+
 from scapy.all import *
+
+# Make the shared utils/ package importable regardless of the current working
+# directory (these scripts are typically run standalone as `python3 red/...`).
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 
 def sniff_packets(interface, count):
     print(f"[*] Sniffing on {interface} for {count} packets...")
@@ -18,7 +25,7 @@ def port_scan(target, start, end):
 
 
 
-from report_utils import write_to_csv
+from utils.report_utils import write_to_csv
 
 def detect_shell_keywords(pcap_file):
     keywords = [b"cmd.exe", b"bash", b"curl", b"powershell", b"wget", b"sh -i"]
@@ -43,18 +50,6 @@ def detect_shell_keywords(pcap_file):
         write_to_csv("reverse_shell_alerts", ["Keyword", "Snippet"], suspicious_rows)
     else:
         print("[*] No suspicious keywords found.")
-
-    keywords = [b"cmd.exe", b"bash", b"curl", b"powershell", b"wget", b"sh -i"]
-    print(f"[*] Analyzing {pcap_file} for suspicious keywords...")
-    packets = rdpcap(pcap_file)
-    for pkt in packets:
-        if pkt.haslayer(Raw):
-            payload = pkt[Raw].load
-            for keyword in keywords:
-                if keyword in payload:
-                    print(f"[!] Found '{keyword.decode()}' in packet:")
-                    print(payload.decode(errors='ignore'))
-                    print("-" * 50)
 
 def main():
     parser = argparse.ArgumentParser(description="Scapy-based Network Toolkit")
